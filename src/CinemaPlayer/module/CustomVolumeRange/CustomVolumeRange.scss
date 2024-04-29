@@ -1,73 +1,77 @@
 //~~
 
 :root {
-  /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
-  --gradient-color: linear-gradient(95deg,
-          hsl(286, 97%, 57%) -7%,
-          hsl(256, 84%, 48%) 112%);
-  --first-color-light: hsl(256, 64%, 88%);
-  --first-color-lighten: hsl(256, 58%, 94%);
-  --white-color: hsl(0, 0%, 100%);
-  --body-color: hsl(256, 100%, 98%);
+	/*========== Colors ==========*/
+	/*Color mode HSL(hue, saturation, lightness)*/
+	--gradient-color: linear-gradient(95deg,
+			hsl(286, 97%, 57%) -7%,
+			hsl(256, 84%, 48%) 112%);
+	--first-color-light: hsl(256, 64%, 88%);
+	--first-color-lighten: hsl(256, 58%, 94%);
+	--white-color: hsl(0, 0%, 100%);
+	--body-color: hsl(256, 100%, 98%);
 
-  /*========== Font and typography ==========*/
-  /*.5rem = 8px | 1rem = 16px ...*/
-  --body-font: "Montserrat", sans-serif;
-  --h1-font-size: 1.5rem;
+	/*========== Font and typography ==========*/
+	/*.5rem = 8px | 1rem = 16px ...*/
+	--body-font: "Montserrat", sans-serif;
+	--h1-font-size: 1.5rem;
 }
 
 .range {
-  $color-main: #DA0027;
-  $color-second: #101011;
-  $size-height-range-input: 10px;
-  $size-height-range-thumb: 20px;
-  $radius: 10px;
+	$color-main: #DA0027;
+	$color-second: #101011;
+	$size-height-range-input: 10px;
+	$size-height-range-thumb: 20px;
+	$radius: 10px;
 
-  width: 130px;
-  background-color: transparent;
-  border-radius: $radius;
-  box-shadow: 0 6px 16px hsla(256, 72%, 24%, 0.15);
-  display: grid;
+	width: 130px;
+	background-color: transparent;
+	border-radius: $radius;
+	box-shadow: 0 6px 16px hsla(256, 72%, 24%, 0.15);
+	display: grid;
 
-  &__content {
-    position: relative;
-    width: 100%;
-    display: grid;
-    place-items: center;
-  }
+	@media screen and (max-width:600px) {
+		display: none;
+	}
 
-  &__slider {
-    width: 100%;
-    height: $size-height-range-input;
-    background: $color-second;
-    border-radius: $radius;
-    box-shadow: 0 4px 12px hsla(256, 72%, 24%, 0.2);
-    overflow: hidden;
+	&__content {
+		position: relative;
+		width: 100%;
+		display: grid;
+		place-items: center;
+	}
 
-    &-line {
-      height: 100%;
-      background: linear-gradient(90deg, $color-second 0%, $color-main 70%);
-      position: relative;
-    }
-  }
+	&__slider {
+		width: 100%;
+		height: $size-height-range-input;
+		background: $color-second;
+		border-radius: $radius;
+		box-shadow: 0 4px 12px hsla(256, 72%, 24%, 0.2);
+		overflow: hidden;
 
-  &__input {
-    appearance: none;
-    width: 100%;
-    height: $size-height-range-input;
-    position: absolute;
-    background: transparent;
-    border-radius: 4rem;
+		&-line {
+			height: 100%;
+			background: linear-gradient(90deg, $color-second 0%, $color-main 70%);
+			position: relative;
+		}
+	}
 
-    &::-webkit-slider-thumb {
-      appearance: none;
-      width: $size-height-range-thumb;
-      height: $size-height-range-thumb;
-      background: $color-second;
-      border: 4px solid $color-main;
-      border-radius: 50%;
-      box-shadow: 0 0 12px hsla(256, 72%, 24%, 0.2), inset 0 2px 4px #000;
-    }
-  }
+	&__input {
+		appearance: none;
+		width: 100%;
+		height: $size-height-range-input;
+		position: absolute;
+		background: transparent;
+		border-radius: 4rem;
+
+		&::-webkit-slider-thumb {
+			appearance: none;
+			width: $size-height-range-thumb;
+			height: $size-height-range-thumb;
+			background: $color-second;
+			border: 4px solid $color-main;
+			border-radius: 50%;
+			box-shadow: 0 0 12px hsla(256, 72%, 24%, 0.2), inset 0 2px 4px #000;
+		}
+	}
 }

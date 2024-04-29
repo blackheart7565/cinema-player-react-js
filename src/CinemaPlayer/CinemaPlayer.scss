@@ -3,159 +3,197 @@
 
 
 #cinema_player {
-    display: flex;
-    position: relative;
-    max-width: 900px;
-    max-height: 900px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.24);
-    font-family: 'Poppins', sans-serif;
+	display: flex;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	min-height: 200px;
+	overflow: hidden;
+	box-shadow: 0 0 5px rgba(255, 255, 255, 0.24);
+	font-family: 'Poppins', sans-serif;
 }
 
-
 .cinema-player {
-    $self: &;
+	$self: &;
 
-    #main-video,
-    &__main-video {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        outline: none;
-    }
+	.cpy-visible &__controls {
+		opacity: 1;
+		pointer-events: auto;
+	}
 
-    &__controls {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 70px;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 20;
+	&.cpy-user-inactive {
+		cursor: none;
+	}
 
-        #{$self}__progress {
-            cursor: pointer;
-            position: relative;
-            height: 7px;
-            width: 100%;
-            margin-inline: auto;
-            background-color: rgba(100, 100, 100, 0.5);
-            z-index: 21;
+	#main-video,
+	&__main-video {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		outline: none;
+	}
 
-            #{$self}__progress-bar {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                background: #DA0027;
-                border-radius: 5px;
-                z-index: 22;
+	&__controls {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 70px;
+		background: rgba(0, 0, 0, 0.7);
+		z-index: 20;
+		transition: opacity 0.5s ease-in-out;
+		opacity: 0;
+		pointer-events: none;
 
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    right: -5px;
-                    transform: translateY(-50%) scale(0);
-                    width: 14px;
-                    height: 14px;
-                    background: inherit;
-                    border-radius: 50%;
-                    transition: box-shadow 0.2s ease-in-out,
-                        transform 0.2s ease-in-out;
-                }
-            }
+		@media screen and (max-width: 480px) {
+			height: 55px;
+		}
 
-            #{$self}__progress-buffer {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 60%;
-                height: 100%;
-                background-color: rgb(150, 150, 150, 0.9);
-                border-radius: 5px;
-                z-index: -1;
-            }
+		#{$self}__progress {
+			cursor: pointer;
+			position: relative;
+			height: 7px;
+			width: 100%;
+			margin-inline: auto;
+			background-color: rgba(100, 100, 100, 0.5);
+			z-index: 21;
 
-            &:hover #{$self}__progress-bar::before {
-                box-shadow: 0 0 10px #DA0027, 0 0 20px #DA0027, 0 0 30px #DA0027;
-                transform: translateY(-50%) scale(1);
-            }
-        }
+			#{$self}__progress-bar {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				background: #DA0027;
+				border-radius: 5px;
+				z-index: 22;
 
-        #{$self}__controls-menu {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 98%;
-            margin: 0 auto;
-            padding: 10px 0 5px 0;
+				&::before {
+					content: '';
+					position: absolute;
+					top: 50%;
+					right: -5px;
+					transform: translateY(-50%) scale(0);
+					width: 14px;
+					height: 14px;
+					background: inherit;
+					border-radius: 50%;
+					transition: box-shadow 0.2s ease-in-out,
+						transform 0.2s ease-in-out;
+				}
+			}
 
-            #{$self}__controls-left {
-                display: flex;
-                align-items: center;
-                gap: 20px;
+			#{$self}__progress-buffer {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 60%;
+				height: 100%;
+				background-color: rgb(150, 150, 150, 0.9);
+				border-radius: 5px;
+				z-index: -1;
+			}
 
-                #{$self}__toggle-play {
-                    background: #DA0027;
-                    border-radius: 50%;
-                    width: 45px;
-                    height: 45px;
+			&:hover #{$self}__progress-bar::before {
+				box-shadow: 0 0 10px #DA0027, 0 0 20px #DA0027, 0 0 30px #DA0027;
+				transform: translateY(-50%) scale(1);
+			}
+		}
 
-                    &>* {
-                        width: calc(100% - 10px);
-                        height: calc(100% - 10px);
-                        fill: #101011;
-                    }
-                }
+		#{$self}__controls-menu {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 98%;
+			margin: 0 auto;
+			padding: 10px 0 5px 0;
 
-                #{$self}__volume-range {
-                    display: flex;
-                    align-items: center;
-                }
+			#{$self}__controls-left {
+				display: flex;
+				align-items: center;
+				gap: 20px;
 
-                #{$self}__volume-range-btn {}
+				@media screen and (max-width: 480px) {
+					gap: 5px;
+				}
 
-                #{$self}__timer {
-                    color: #ffffff;
+				#{$self}__toggle-play {
+					background: #DA0027;
+					border-radius: 50%;
+					width: 45px;
+					height: 45px;
 
-                    &>* {
-                        pointer-events: none;
-                    }
-                }
+					@media screen and (max-width: 480px) {
+						width: 30px;
+						height: 30px;
+					}
 
-                #{$self}__timer-current {}
+					&>* {
+						width: calc(100% - 10px);
+						height: calc(100% - 10px);
+						fill: #101011;
+					}
+				}
 
-                #{$self}__trait {}
+				#{$self}__volume-range {
+					display: flex;
+					align-items: center;
+				}
 
-                #{$self}__timer-duration {}
-            }
+				#{$self}__volume-range-btn {}
 
-            #{$self}__controls-right {
-                display: flex;
-                align-items: center;
-                gap: 15px;
-            }
-        }
+				#{$self}__timer {
+					color: #ffffff;
 
-    }
+					@media screen and (max-width: 480px) {
+						font-size: 12px;
+					}
+
+					&>* {
+						pointer-events: none;
+					}
+				}
+
+				#{$self}__timer-current {}
+
+				#{$self}__trait {}
+
+				#{$self}__timer-duration {}
+			}
+
+			#{$self}__controls-right {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+
+				@media screen and (max-width: 480px) {
+					gap: 5px;
+				}
+			}
+		}
+
+	}
 }
 
 .button-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    border: none;
-    outline: none;
-    width: 40px;
-    height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: transparent;
+	border: none;
+	outline: none;
+	width: 40px;
+	height: 40px;
 
-    &>* {
-        fill: #fff;
-        cursor: pointer;
-        width: calc(100% - 10px);
-        height: calc(100% - 10px);
-    }
+	@media screen and (max-width: 480px) {
+		width: 30px;
+		height: 30px;
+	}
+
+	&>* {
+		fill: #fff;
+		cursor: pointer;
+		width: calc(100% - 10px);
+		height: calc(100% - 10px);
+	}
 }
